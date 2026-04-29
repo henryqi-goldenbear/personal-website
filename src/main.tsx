@@ -1,0 +1,311 @@
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom/client";
+import {
+  ArrowUpRight,
+  BookOpen,
+  BriefcaseBusiness,
+  Code2,
+  Database,
+  GraduationCap,
+  GitBranch,
+  Layers3,
+  Link,
+  Mail,
+  Medal,
+  Server,
+  Waves,
+} from "lucide-react";
+import "./styles.css";
+
+type Experience = {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  highlights: string[];
+};
+
+const experiences: Experience[] = [
+  {
+    role: "Software Engineering Intern",
+    company: "CoPatible",
+    location: "Berkeley, CA",
+    period: "Jan 2026 - Present",
+    highlights: [
+      "Engineered a high-throughput Java backend pipeline that improved system throughput and stream efficiency by 30% under production-scale workloads.",
+      "Built TypeScript and React dashboards for real-time API performance monitoring, reducing incident response time by 35%.",
+      "Implemented secure multi-tenant data isolation to strengthen data protection, reduce cross-tenant risk, and accelerate regression testing workflows.",
+    ],
+  },
+  {
+    role: "Teaching Assistant",
+    company: "UC Berkeley Computer Science Department",
+    location: "Berkeley, CA",
+    period: "Jan 2024 - May 2025",
+    highlights: [
+      "Mentored 50+ students through Bode plots, RLC circuits, stability, controllability, and PCA with structured problem-solving sessions.",
+      "Designed standardized grading rubrics that increased grading consistency and reduced evaluation time by about 25%.",
+      "Created iterative feedback loops that helped more than 80% of students improve performance on difficult systems and circuits concepts.",
+    ],
+  },
+  {
+    role: "Software Engineering Intern",
+    company: "Xiao-I",
+    location: "Remote",
+    period: "May 2024 - Aug 2024",
+    highlights: [
+      "Developed Python data pipelines integrating REST APIs with relational databases, improving processing efficiency by 35%.",
+      "Architected an LLM-based extraction system for unstructured data that reduced manual categorization time by 50%.",
+      "Designed backend specifications for high-volume ingestion and improved system performance under load by 40%.",
+    ],
+  },
+];
+
+const skills = [
+  {
+    label: "Languages",
+    icon: Code2,
+    items: ["Python", "Java", "C++", "TypeScript", "SQL", "Go", "Rust", "Bash"],
+  },
+  {
+    label: "Backend",
+    icon: Server,
+    items: ["Spring Boot", "FastAPI", "Django", "Express", "GraphQL", "gRPC", "Kafka"],
+  },
+  {
+    label: "Frontend",
+    icon: Layers3,
+    items: ["React", "Next.js", "Redux", "Tailwind CSS", "Angular", "Vue.js"],
+  },
+  {
+    label: "Data + Infra",
+    icon: Database,
+    items: ["PostgreSQL", "MongoDB", "Redis", "AWS", "Docker", "Kubernetes", "Terraform"],
+  },
+];
+
+const stats = [
+  ["30%", "throughput gain in production-scale backend workflows"],
+  ["50+", "students mentored as a Berkeley teaching assistant"],
+  ["4x", "swim club national championship qualifier"],
+  ["3.75", "GPA in Berkeley EECS with a math minor"],
+];
+
+const rotatingIntro = ["Berkeley EECS", "Software Engineering", "Competitive Swimming"];
+
+function TypedLoop() {
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [letterCount, setLetterCount] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const phrase = rotatingIntro[phraseIndex];
+    const isComplete = letterCount === phrase.length;
+    const isEmpty = letterCount === 0;
+    const delay = isComplete && !isDeleting ? 1300 : isDeleting ? 42 : 82;
+
+    const timeout = window.setTimeout(() => {
+      if (isComplete && !isDeleting) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isEmpty && isDeleting) {
+        setIsDeleting(false);
+        setPhraseIndex((current) => (current + 1) % rotatingIntro.length);
+        return;
+      }
+
+      setLetterCount((current) => current + (isDeleting ? -1 : 1));
+    }, delay);
+
+    return () => window.clearTimeout(timeout);
+  }, [isDeleting, letterCount, phraseIndex]);
+
+  return (
+    <span className="typed-loop" aria-live="polite">
+      {rotatingIntro[phraseIndex].slice(0, letterCount)}
+      <span className="cursor" aria-hidden="true" />
+    </span>
+  );
+}
+
+function App() {
+  return (
+    <main>
+      <header className="site-header" aria-label="Primary navigation">
+        <a className="brand" href="#top" aria-label="Henry Qi home">
+          HQ
+        </a>
+        <nav>
+          <a href="#work">Work</a>
+          <a href="#project">Project</a>
+          <a href="#skills">Skills</a>
+          <a href="mailto:henryqi@berkeley.edu" className="nav-contact">
+            Contact
+          </a>
+        </nav>
+      </header>
+
+      <section className="hero" id="top">
+        <div className="hero-copy">
+          <p className="eyebrow">
+            <TypedLoop />
+          </p>
+          <p className="hero-name">Henry Qi</p>
+          <p className="hero-text">
+            I am an EECS student at UC Berkeley, a software engineer across backend
+            pipelines and React dashboards, and a four-time swim club national
+            championship qualifier.
+          </p>
+          <div className="hero-actions">
+            <a className="button primary" href="mailto:henryqi@berkeley.edu">
+              <Mail size={18} aria-hidden="true" />
+              Email me
+            </a>
+            <a className="button secondary" href="https://linkedin.com/in/henry-qi-2026qi">
+              <Link size={18} aria-hidden="true" />
+              LinkedIn
+            </a>
+            <a className="button secondary" href="https://github.com/henryqi-goldenbear">
+              <Code2 size={18} aria-hidden="true" />
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div className="hero-visual" aria-label="Greensboro Aquatic Center pool photo">
+          <img
+            src="/greensboro-aquatic-center.jpg"
+            alt="Competition pool at the Greensboro Aquatic Center"
+          />
+          <div className="visual-panel">
+            <Waves size={22} aria-hidden="true" />
+            <span>National qualifier mindset, production systems focus.</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="stat-strip" aria-label="Highlights">
+        {stats.map(([value, label]) => (
+          <article key={label}>
+            <strong>{value}</strong>
+            <span>{label}</span>
+          </article>
+        ))}
+      </section>
+
+      <section className="section split">
+        <div>
+          <p className="section-kicker">Education</p>
+          <h2>UC Berkeley EECS, grounded in math and systems.</h2>
+        </div>
+        <div className="education-block">
+          <GraduationCap size={28} aria-hidden="true" />
+          <div>
+            <h3>B.S. Electrical Engineering and Computer Science</h3>
+            <p>Minor in Mathematics · Expected May 2026 · GPA 3.75/4.00</p>
+            <p>
+              Coursework includes operating systems, database systems, efficient
+              algorithms, computer architecture, linear algebra, probability,
+              optimization, and machine learning.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="work">
+        <div className="section-heading">
+          <p className="section-kicker">Experience</p>
+          <h2>Backend rigor, frontend visibility, and teaching that scales.</h2>
+        </div>
+        <div className="timeline">
+          {experiences.map((experience) => (
+            <article className="timeline-card" key={`${experience.company}-${experience.period}`}>
+              <div className="timeline-top">
+                <div>
+                  <h3>{experience.role}</h3>
+                  <p>
+                    {experience.company} · {experience.location}
+                  </p>
+                </div>
+                <span>{experience.period}</span>
+              </div>
+              <ul>
+                {experience.highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section project-band" id="project">
+        <div className="project-copy">
+          <p className="section-kicker">Selected project</p>
+          <h2>WordNet Search Engine</h2>
+          <p>
+            A Java search engine built around a DAG of 100K+ semantic nodes, optimized
+            for graph traversal and frequency-based ranking.
+          </p>
+        </div>
+        <div className="project-grid">
+          <article>
+            <BookOpen size={24} aria-hidden="true" />
+            <strong>Graph lookup</strong>
+            <span>Optimized traversal improved query efficiency by 60%.</span>
+          </article>
+          <article>
+            <Medal size={24} aria-hidden="true" />
+            <strong>Relevance ranking</strong>
+            <span>Max-Heap filtering increased result relevance accuracy by 35%.</span>
+          </article>
+          <article>
+            <GitBranch size={24} aria-hidden="true" />
+            <strong>Reliability</strong>
+            <span>JUnit coverage validated graph integrity and cyclic dependency safety.</span>
+          </article>
+        </div>
+      </section>
+
+      <section className="section" id="skills">
+        <div className="section-heading">
+          <p className="section-kicker">Technical toolkit</p>
+          <h2>Comfortable from distributed services to polished interfaces.</h2>
+        </div>
+        <div className="skills-grid">
+          {skills.map(({ label, icon: Icon, items }) => (
+            <article className="skill-card" key={label}>
+              <div className="skill-title">
+                <Icon size={24} aria-hidden="true" />
+                <h3>{label}</h3>
+              </div>
+              <div className="chip-row">
+                {items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          <strong>Henry Qi</strong>
+          <span>Software engineer · Berkeley EECS · Swimmer</span>
+        </div>
+        <a href="mailto:henryqi@berkeley.edu">
+          Start a conversation
+          <ArrowUpRight size={18} aria-hidden="true" />
+        </a>
+      </footer>
+    </main>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
