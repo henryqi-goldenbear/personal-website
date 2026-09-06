@@ -295,6 +295,11 @@ footer span {
   padding: clamp(72px, 10vw, 124px) 0 0;
 }
 
+.page-section {
+  min-height: calc(100vh - 72px);
+  padding-bottom: 80px;
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(260px, 0.74fr) minmax(0, 1fr);

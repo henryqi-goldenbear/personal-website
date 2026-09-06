@@ -165,10 +165,22 @@ function TypedLoop() {
 }
 
 function App() {
+  const [page, setPage] = useState(window.location.hash.slice(1) || "home");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setPage(window.location.hash.slice(1) || "home");
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return (
     <main>
       <header className="site-header" aria-label="Primary navigation">
-        <a className="brand" href="#top" aria-label="Henry Qi home">
+        <a className="brand" href="#home" aria-label="Henry Qi home">
           HQ
         </a>
         <nav>
@@ -185,7 +197,9 @@ function App() {
         </nav>
       </header>
 
-      <section className="hero" id="top">
+      {page === "home" && (
+        <>
+          <section className="hero" id="home">
         <div className="hero-copy">
           <p className="eyebrow">
             <TypedLoop />
@@ -248,8 +262,10 @@ function App() {
           </div>
         </div>
       </section>
+        </>
+      )}
 
-      <section className="section" id="work">
+      {page === "work" && <section className="section page-section" id="work">
         <div className="section-heading">
           <p className="section-kicker">Experience</p>
           <h2>AI automation, production backend systems, and teaching that scales.</h2>
@@ -274,9 +290,9 @@ function App() {
             </article>
           ))}
         </div>
-      </section>
+      </section>}
 
-      <section className="section project-band" id="project">
+      {page === "project" && <section className="section project-band page-section" id="project">
         <div className="project-copy">
           <p className="section-kicker">Selected projects</p>
           <h2>AI evaluation systems</h2>
@@ -302,9 +318,9 @@ function App() {
             <span>Combined a Mistral JSON backend, Redis memory, OpenTelemetry, and Arize for high-throughput, observable evaluation workflows.</span>
           </article>
         </div>
-      </section>
+      </section>}
 
-      <section className="section" id="skills">
+      {page === "skills" && <section className="section page-section" id="skills">
         <div className="section-heading">
           <p className="section-kicker">Technical toolkit</p>
           <h2>Building reliable AI systems from evaluation pipelines to production services.</h2>
@@ -324,9 +340,9 @@ function App() {
             </article>
           ))}
         </div>
-      </section>
+      </section>}
 
-      <section className="section interests-section" id="interests">
+      {page === "interests" && <section className="section interests-section page-section" id="interests">
         <div className="section-heading">
           <p className="section-kicker">Beyond the keyboard</p>
           <h2>Interests that keep me curious, moving, and making predictions.</h2>
@@ -345,7 +361,7 @@ function App() {
             </article>
           ))}
         </div>
-      </section>
+      </section>}
 
       <footer>
         <div>
