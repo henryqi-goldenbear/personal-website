@@ -10,8 +10,10 @@ import {
   GitBranch,
   Layers3,
   Link,
+  LineChart,
   Mail,
   Medal,
+  MountainSnow,
   Server,
   Waves,
 } from "lucide-react";
@@ -96,6 +98,35 @@ const assetUrl = (filename: string) =>
 const resumeUrl = assetUrl("henry_swe (8).pdf");
 const heroImageUrl = assetUrl("greensboro-aquatic-center.jpg");
 
+const interests = [
+  {
+    title: "Skiing",
+    description:
+      "Chasing fresh snow in the Sierra Nevada and finding the best lines California mountains have to offer.",
+    image:
+      "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=1200&q=85",
+    icon: MountainSnow,
+    alt: "Skier carving through fresh snow",
+  },
+  {
+    title: "Swimming",
+    description:
+      "A lifelong swimmer and four-time national champion who still loves the rhythm, discipline, and community of the pool.",
+    image: heroImageUrl,
+    icon: Waves,
+    alt: "Competition swimming pool",
+  },
+  {
+    title: "Prediction",
+    description:
+      "Exploring how data, uncertainty, and machine learning can turn noisy signals into useful decisions.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85",
+    icon: LineChart,
+    alt: "Analytics dashboard with charts",
+  },
+];
+
 function TypedLoop() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [letterCount, setLetterCount] = useState(0);
@@ -144,6 +175,7 @@ function App() {
           <a href="#work">Work</a>
           <a href="#project">Project</a>
           <a href="#skills">Skills</a>
+          <a href="#interests">Interests</a>
           <a href={resumeUrl} target="_blank" rel="noreferrer">
             Resume
           </a>
@@ -288,6 +320,27 @@ function App() {
                 {items.map((item) => (
                   <span key={item}>{item}</span>
                 ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section interests-section" id="interests">
+        <div className="section-heading">
+          <p className="section-kicker">Beyond the keyboard</p>
+          <h2>Interests that keep me curious, moving, and making predictions.</h2>
+        </div>
+        <div className="interests-grid">
+          {interests.map(({ title, description, image, icon: Icon, alt }) => (
+            <article className="interest-card" key={title}>
+              <img src={image} alt={alt} loading="lazy" />
+              <div className="interest-content">
+                <div className="skill-title">
+                  <Icon size={24} aria-hidden="true" />
+                  <h3>{title}</h3>
+                </div>
+                <p>{description}</p>
               </div>
             </article>
           ))}
