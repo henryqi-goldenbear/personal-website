@@ -91,7 +91,10 @@ const stats = [
 ];
 
 const rotatingIntro = ["Berkeley EECS", "AI Systems", "Software Engineering"];
-const resumeUrl = "/henry_swe%20(8).pdf";
+const assetUrl = (filename: string) =>
+  `${import.meta.env.BASE_URL}${encodeURIComponent(filename).replace(/%2F/g, "/")}`;
+const resumeUrl = assetUrl("henry_swe (8).pdf");
+const heroImageUrl = assetUrl("greensboro-aquatic-center.jpg");
 
 function TypedLoop() {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -181,7 +184,7 @@ function App() {
         </div>
         <div className="hero-visual" aria-label="Greensboro Aquatic Center pool photo">
           <img
-            src="/greensboro-aquatic-center.jpg"
+            src={heroImageUrl}
             alt="Competition pool at the Greensboro Aquatic Center"
           />
         </div>
