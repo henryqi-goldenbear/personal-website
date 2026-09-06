@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import {
   ArrowUpRight,
   BookOpen,
-  BriefcaseBusiness,
   Code2,
   Database,
+  FileText,
   GraduationCap,
   GitBranch,
   Layers3,
@@ -27,36 +27,35 @@ type Experience = {
 
 const experiences: Experience[] = [
   {
-    role: "Software Engineering Intern",
-    company: "CoPatible",
-    location: "Berkeley, CA",
-    period: "Jan 2026 - Present",
+    role: "Software & Automation Engineering Intern",
+    company: "Intel Corporation",
+    location: "Folsom, CA",
+    period: "Aug 2026 - Dec 2026",
     highlights: [
-      "Engineered a high-throughput Java backend pipeline that improved system throughput and stream efficiency by 30% under production-scale workloads.",
-      "Built TypeScript and React dashboards for real-time API performance monitoring, reducing incident response time by 35%.",
-      "Implemented secure multi-tenant data isolation to strengthen data protection, reduce cross-tenant risk, and accelerate regression testing workflows.",
+      "Built a domain-specific RAG pipeline over technical chip specifications and command protocols to power an autonomous validation AI agent for hardware triage.",
+      "Engineered a CLI developer automation tool that eliminates repetitive command lookups and reduces onboarding friction across engineering teams.",
+      "Integrated structured logging and error handling into internal automation workflows to improve hardware debugging speed and system-test visibility.",
     ],
   },
   {
-    role: "Teaching Assistant",
+    role: "Backend Engineer",
+    company: "Copatible",
+    location: "Berkeley, CA",
+    period: "Jan 2026 - May 2026",
+    highlights: [
+      "Engineered a high-throughput Java backend pipeline that improved system throughput and stream efficiency by 30% under production-scale workloads.",
+      "Implemented secure multi-tenant data isolation, reducing cross-tenant risk by 40% while accelerating regression testing workflows by 25%.",
+    ],
+  },
+  {
+    role: "EECS Tutor",
     company: "UC Berkeley Computer Science Department",
     location: "Berkeley, CA",
     period: "Jan 2024 - May 2025",
     highlights: [
-      "Mentored 50+ students through Bode plots, RLC circuits, stability, controllability, and PCA with structured problem-solving sessions.",
-      "Designed standardized grading rubrics that increased grading consistency and reduced evaluation time by about 25%.",
-      "Created iterative feedback loops that helped more than 80% of students improve performance on difficult systems and circuits concepts.",
-    ],
-  },
-  {
-    role: "Software Engineering Intern",
-    company: "Xiao-I",
-    location: "Remote",
-    period: "May 2024 - Aug 2024",
-    highlights: [
-      "Developed Python data pipelines integrating REST APIs with relational databases, improving processing efficiency by 35%.",
-      "Architected an LLM-based extraction system for unstructured data that reduced manual categorization time by 50%.",
-      "Designed backend specifications for high-volume ingestion and improved system performance under load by 40%.",
+      "Mentored 100+ students during office hours on discrete math, graph theory, and probability distributions.",
+      "Designed standardized grading rubrics for exams and assignments, increasing grading consistency and reducing evaluation time by about 25%.",
+      "Delivered iterative feedback that helped more than 80% of students improve performance on complex circuit and system-analysis concepts.",
     ],
   },
 ];
@@ -65,33 +64,34 @@ const skills = [
   {
     label: "Languages",
     icon: Code2,
-    items: ["Python", "Java", "C++", "TypeScript", "SQL", "Go", "Rust", "Bash"],
+    items: ["Python", "Java", "C++", "SQL", "JavaScript", "TypeScript", "Rust", "HTML/CSS"],
   },
   {
-    label: "Backend",
+    label: "AI + Infrastructure",
     icon: Server,
-    items: ["Spring Boot", "FastAPI", "Django", "Express", "GraphQL", "gRPC", "Kafka"],
+    items: ["RAG Pipelines", "Vector Embeddings", "MCP", "LLM Agents", "Redis", "MongoDB Atlas", "Docker", "AWS"],
   },
   {
-    label: "Frontend",
+    label: "Observability",
     icon: Layers3,
-    items: ["React", "Next.js", "Redux", "Tailwind CSS", "Angular", "Vue.js"],
+    items: ["OpenTelemetry", "Arize", "Structured Logging", "Error Handling"],
   },
   {
-    label: "Data + Infra",
+    label: "Frameworks + Tools",
     icon: Database,
-    items: ["PostgreSQL", "MongoDB", "Redis", "AWS", "Docker", "Kubernetes", "Terraform"],
+    items: ["React", "Node.js", "Spring Boot", "FastAPI", "Flask", "PyTest", "JUnit", "gRPC", "Git", "Linux"],
   },
 ];
 
 const stats = [
-  ["30%", "throughput gain in production-scale backend workflows"],
-  ["50+", "students mentored as a Berkeley teaching assistant"],
-  ["4x", "swim club national championship qualifier"],
-  ["3.75", "GPA in Berkeley EECS with a math minor"],
+  ["50-60x", "higher throughput for AI interview evaluations"],
+  ["100+", "students mentored as a Berkeley CS tutor"],
+  ["40%", "reduction in cross-tenant risk at Copatible"],
+  ["3.75", "GPA in Berkeley EECS"],
 ];
 
-const rotatingIntro = ["Berkeley EECS", "Software Engineering", "Competitive Swimming"];
+const rotatingIntro = ["Berkeley EECS", "AI Systems", "Software Engineering"];
+const resumeUrl = "/henry_swe%20(8).pdf";
 
 function TypedLoop() {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -141,6 +141,9 @@ function App() {
           <a href="#work">Work</a>
           <a href="#project">Project</a>
           <a href="#skills">Skills</a>
+          <a href={resumeUrl} target="_blank" rel="noreferrer">
+            Resume
+          </a>
           <a href="mailto:henryqi@berkeley.edu" className="nav-contact">
             Contact
           </a>
@@ -154,12 +157,15 @@ function App() {
           </p>
           <p className="hero-name">Henry Qi</p>
           <p className="hero-text">
-            I am an EECS student at UC Berkeley, a software engineer across backend
-            pipelines and React dashboards, and a four-time swim club national
-            championship qualifier.
+            I am an EECS student at UC Berkeley building AI systems, RAG pipelines,
+            developer automation, and reliable backend infrastructure.
           </p>
           <div className="hero-actions">
-            <a className="button primary" href="mailto:henryqi@berkeley.edu">
+            <a className="button primary" href={resumeUrl} target="_blank" rel="noreferrer">
+              <FileText size={18} aria-hidden="true" />
+              Resume
+            </a>
+            <a className="button secondary" href="mailto:henryqi@berkeley.edu">
               <Mail size={18} aria-hidden="true" />
               Email me
             </a>
@@ -178,10 +184,6 @@ function App() {
             src="/greensboro-aquatic-center.jpg"
             alt="Competition pool at the Greensboro Aquatic Center"
           />
-          <div className="visual-panel">
-            <Waves size={22} aria-hidden="true" />
-            <span>National qualifier mindset, production systems focus.</span>
-          </div>
         </div>
       </section>
 
@@ -197,17 +199,16 @@ function App() {
       <section className="section split">
         <div>
           <p className="section-kicker">Education</p>
-          <h2>UC Berkeley EECS, grounded in math and systems.</h2>
+          <h2>UC Berkeley EECS, grounded in systems and machine learning.</h2>
         </div>
         <div className="education-block">
           <GraduationCap size={28} aria-hidden="true" />
           <div>
             <h3>B.S. Electrical Engineering and Computer Science</h3>
-            <p>Minor in Mathematics · Expected May 2026 · GPA 3.75/4.00</p>
+            <p>Aug 2022 - May 2026 · GPA 3.75/4.00</p>
             <p>
-              Coursework includes operating systems, database systems, efficient
-              algorithms, computer architecture, linear algebra, probability,
-              optimization, and machine learning.
+              Coursework includes machine learning, efficient algorithms, discrete
+              math and probability, operating systems, and database systems.
             </p>
           </div>
         </div>
@@ -216,7 +217,7 @@ function App() {
       <section className="section" id="work">
         <div className="section-heading">
           <p className="section-kicker">Experience</p>
-          <h2>Backend rigor, frontend visibility, and teaching that scales.</h2>
+          <h2>AI automation, production backend systems, and teaching that scales.</h2>
         </div>
         <div className="timeline">
           {experiences.map((experience) => (
@@ -242,28 +243,28 @@ function App() {
 
       <section className="section project-band" id="project">
         <div className="project-copy">
-          <p className="section-kicker">Selected project</p>
-          <h2>WordNet Search Engine</h2>
+          <p className="section-kicker">Selected projects</p>
+          <h2>AI evaluation systems</h2>
           <p>
-            A Java search engine built around a DAG of 100K+ semantic nodes, optimized
-            for graph traversal and frequency-based ranking.
+            Multi-agent evaluation pipelines for interview and tutoring workflows,
+            built for reliable scoring, auditing, observability, and iteration.
           </p>
         </div>
         <div className="project-grid">
           <article>
             <BookOpen size={24} aria-hidden="true" />
-            <strong>Graph lookup</strong>
-            <span>Optimized traversal improved query efficiency by 60%.</span>
+            <strong>Interview evaluation pipeline</strong>
+            <span>Processed 50+ transcripts and more than 400 candidate responses into structured JSON cases and rubric-based reports.</span>
           </article>
           <article>
             <Medal size={24} aria-hidden="true" />
-            <strong>Relevance ranking</strong>
-            <span>Max-Heap filtering increased result relevance accuracy by 35%.</span>
+            <strong>Tutor evaluation engine</strong>
+            <span>Evaluated about 1,000 tutoring sessions for engagement, scaffolding, and goal alignment with automated QA feedback.</span>
           </article>
           <article>
             <GitBranch size={24} aria-hidden="true" />
-            <strong>Reliability</strong>
-            <span>JUnit coverage validated graph integrity and cyclic dependency safety.</span>
+            <strong>Auditable evaluation infrastructure</strong>
+            <span>Combined a Mistral JSON backend, Redis memory, OpenTelemetry, and Arize for high-throughput, observable evaluation workflows.</span>
           </article>
         </div>
       </section>
@@ -271,7 +272,7 @@ function App() {
       <section className="section" id="skills">
         <div className="section-heading">
           <p className="section-kicker">Technical toolkit</p>
-          <h2>Comfortable from distributed services to polished interfaces.</h2>
+          <h2>Building reliable AI systems from evaluation pipelines to production services.</h2>
         </div>
         <div className="skills-grid">
           {skills.map(({ label, icon: Icon, items }) => (
@@ -293,7 +294,7 @@ function App() {
       <footer>
         <div>
           <strong>Henry Qi</strong>
-          <span>Software engineer · Berkeley EECS · Swimmer</span>
+          <span>Software engineer · Berkeley EECS · AI systems</span>
         </div>
         <a href="mailto:henryqi@berkeley.edu">
           Start a conversation
