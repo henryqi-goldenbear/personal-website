@@ -22,4 +22,4 @@ to GitHub Pages whenever `main` is updated.
 4. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually).
 
 The site will be available at
-`https://henryqi-goldenbear.github.io/personal-website/`.
+`https://henryqi.github.io/personal-website/`.
